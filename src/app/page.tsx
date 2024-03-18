@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div>
+      <h1 className="text-2xl font-bold text-center mt-5">Imoveis - SP</h1>
       <InputForm />
     </div>
   )

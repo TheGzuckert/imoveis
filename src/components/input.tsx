@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+// import { useState } from 'react'
 
 const FormSchema = z.object({
   pesquisa: z.string().min(2, {
@@ -40,7 +41,7 @@ export function InputForm() {
   }
 
   return (
-    <div className="flex justify-center items-start mt-10">
+    <div className="flex justify-center items-start mt-5">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
