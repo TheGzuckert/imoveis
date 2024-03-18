@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-// import { useState } from 'react'
+import { useState } from 'react'
 
 const FormSchema = z.object({
   pesquisa: z.string().min(2, {
@@ -40,6 +40,15 @@ export function InputForm() {
     form.setValue('pesquisa', '')
   }
 
+  const [filterValue, setFilterValue] = useState('')
+
+  const setFilter = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    const dados = await fetch(`http://localhost:3333/dados/${filterValue}`)
+    const resultado = await dados.json()
+    console.log(resultado)
+  }
+
   return (
     <div className="flex justify-center items-start mt-5">
       <Form {...form}>
@@ -58,10 +67,15 @@ export function InputForm() {
                       <Input
                         placeholder="Escreva algo aqui para obter informações do imóvel"
                         {...field}
+                        onChange={(e) => {
+                          e.preventDefault()
+                          field.onChange(e)
+                          setFilterValue(e.target.value)
+                        }}
                         className="w-[400px]"
                       />
                     </FormControl>
-                    <Button type="submit" className="ml-2">
+                    <Button type="submit" className="ml-2" onClick={setFilter}>
                       Buscar
                     </Button>
                   </div>
