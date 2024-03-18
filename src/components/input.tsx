@@ -36,8 +36,6 @@ export function InputForm() {
         </pre>
       ),
     })
-
-    // Limpa o campo de input após a submissão
     form.setValue('pesquisa', '')
   }
 
@@ -66,7 +64,12 @@ export function InputForm() {
                       Buscar
                     </Button>
                   </div>
-                  <FormMessage className="mt-5" />
+                  {form.formState.errors.pesquisa &&
+                    form.getValues('pesquisa') !== '' && (
+                      <FormMessage className="mt-5">
+                        {form.formState.errors.pesquisa.message}
+                      </FormMessage>
+                    )}
                 </div>
               </FormItem>
             )}
