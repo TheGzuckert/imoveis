@@ -1,24 +1,21 @@
 'use client'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-
 import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  // FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 
 const FormSchema = z.object({
-  pesquisa: z.string().regex(/^\d{4,}$/, {
-    message: 'A pesquisa deve ter no mínimo 3 caracteres ou numeros',
+  pesquisa: z.string().min(2, {
+    message: 'A pesquisa deve ter no mínimo 2 caracteres ou números',
   }),
 })
 
@@ -30,15 +27,18 @@ export function InputForm() {
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
     toast({
-      title: 'You submitted the following values:',
+      title: 'Você enviou os seguintes valores:',
       description: (
         <pre className="mt-2 w-[600px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 4)}</code>
         </pre>
       ),
     })
+
+    // Limpa o campo de input após a submissão
+    form.setValue('pesquisa', '')
   }
 
   return (
@@ -48,7 +48,6 @@ export function InputForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-2/3 space-y-3"
         >
-          {/* <FormLabel>Pesquisa</FormLabel> */}
           <FormField
             control={form.control}
             name="pesquisa"
