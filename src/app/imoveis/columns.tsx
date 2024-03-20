@@ -35,6 +35,10 @@ export const columns: ColumnDef<Imoveis>[] = [
     header: 'Cep',
   },
   {
+    accessorKey: 'bairro',
+    header: 'Bairro',
+  },
+  {
     accessorKey: 'areaTerreno',
     header: 'Area Terreno',
   },
