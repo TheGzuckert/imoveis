@@ -12,10 +12,13 @@ export default function FormPage() {
   }
 
   return (
-    <div className="mt-8">
-      <InputForm onFilter={setFilter} />
-      <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={data.imoveis} />
+    <div>
+      <h1 className="text-2xl font-bold text-center mt-4">Imoveis - SP</h1>
+      <div>
+        <InputForm onFilter={setFilter} />
+        <div className="container mx-auto py-2">
+          <DataTable columns={columns} data={data.imoveis} />
+        </div>
       </div>
     </div>
   )

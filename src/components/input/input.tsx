@@ -43,7 +43,7 @@ export function InputForm(props) {
   const [filterValue, setFilterValue] = useState('')
 
   return (
-    <div className="flex justify-center items-start mt-5">
+    <div className="flex justify-center items-start mt-3">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
