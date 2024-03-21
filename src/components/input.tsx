@@ -15,20 +15,28 @@ import { toast } from '@/components/ui/use-toast'
 import { useState } from 'react'
 
 const FormSchema = z.object({
-  pesquisa: z.string().min(2, {
-    message: 'A pesquisa deve ter no mínimo 2 caracteres ou números',
+  pesquisa: z.string().min(1, {
+    message: 'A pesquisa deve ter no mínimo 1 caracter',
   }),
 })
 
-export function InputForm(props) {
-  const form = useForm<z.infer<typeof FormSchema>>({
+export interface InputFormProps {
+  onFilter: (filterValue: string) => void
+}
+
+export function InputForm(props: InputFormProps) {
+  interface FormData {
+    pesquisa: string
+  }
+
+  const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       pesquisa: '',
     },
   })
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = (data: FormData) => {
     toast({
       title: 'Você enviou os seguintes valores:',
       description: (
@@ -40,7 +48,7 @@ export function InputForm(props) {
     form.setValue('pesquisa', '')
   }
 
-  const [filterValue, setFilterValue] = useState('')
+  const [filterValue, setFilterValue] = useState<string>('')
 
   return (
     <div className="flex justify-center items-start mt-3">

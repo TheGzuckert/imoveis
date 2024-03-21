@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Imoveis } from './imoveis/columns'
+import { Imoveis } from '../components/columns'
 
 export function useImovelStore() {
   const [imoveis, setImoveis] = useState<Imoveis[]>([])
@@ -8,7 +8,6 @@ export function useImovelStore() {
     const dados = await fetch(`http://localhost:3333/dados/${query}`)
     const resultado = await dados.json()
     setImoveis(resultado)
-    // console.log('query', query)
   }
 
   useEffect(() => {
